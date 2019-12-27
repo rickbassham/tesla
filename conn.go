@@ -60,7 +60,7 @@ func (c *Conn) doRequest(method, url string, reqBody, respBody interface{}) erro
 	if reqBody != nil {
 		reqBytes, err := json.Marshal(reqBody)
 		if err != nil {
-			return err
+			return fmt.Errorf("error marshaling request body: %w", err)
 		}
 
 		reqBodyReader = bytes.NewReader(reqBytes)
@@ -68,7 +68,7 @@ func (c *Conn) doRequest(method, url string, reqBody, respBody interface{}) erro
 
 	req, err := http.NewRequest(method, fmt.Sprintf("%s%s", c.baseURL, url), reqBodyReader)
 	if err != nil {
-		return err
+		return fmt.Errorf("error creating http request: %w", err)
 	}
 
 	if reqBodyReader != nil {
@@ -81,7 +81,7 @@ func (c *Conn) doRequest(method, url string, reqBody, respBody interface{}) erro
 
 	resp, err := c.rt.RoundTrip(req)
 	if err != nil {
-		return err
+		return fmt.Errorf("error performing http request: %w", err)
 	}
 
 	if resp.StatusCode != http.StatusOK {
@@ -94,12 +94,12 @@ func (c *Conn) doRequest(method, url string, reqBody, respBody interface{}) erro
 
 	respBytes, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return err
+		return fmt.Errorf("error reading http response body: %w", err)
 	}
 
 	err = json.Unmarshal(respBytes, respBody)
 	if err != nil {
-		return err
+		return fmt.Errorf("error unmarshaling response: %w", err)
 	}
 
 	return nil

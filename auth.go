@@ -39,7 +39,7 @@ func (c *Conn) Authenticate(email, password string) error {
 
 	var respBody response
 
-	err := c.doRequest(http.MethodPost, "/oauth/token?grant_type=password", &reqBody, &respBody)
+	err := c.doRequest(http.MethodPost, "/oauth/token", &reqBody, &respBody)
 	if err != nil {
 		return err
 	}
@@ -81,7 +81,7 @@ func (c *Conn) UpdateRefreshToken() error {
 
 	var respBody response
 
-	err := c.doRequest(http.MethodPost, "/oauth/token?grant_type=refresh_token", &reqBody, &respBody)
+	err := c.doRequest(http.MethodPost, "/oauth/token", &reqBody, &respBody)
 	if err != nil {
 		return err
 	}
