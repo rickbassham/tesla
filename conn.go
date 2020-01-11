@@ -54,6 +54,11 @@ func (c *Conn) SetRefreshToken(refreshToken string) {
 	c.refreshToken = refreshToken
 }
 
+// SetAccessToken allows you to override the access token received from Authenticate.
+func (c *Conn) SetAccessToken(accessToken string) {
+	c.accessToken = accessToken
+}
+
 func (c *Conn) doRequest(method, url string, reqBody, respBody interface{}) error {
 	var reqBodyReader io.Reader
 

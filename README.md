@@ -475,6 +475,14 @@ available.
 
 The offset given is how long to delay installing the update.
 
+#### func (*Conn) SetAccessToken
+
+```go
+func (c *Conn) SetAccessToken(accessToken string)
+```
+SetAccessToken allows you to override the access token received from
+Authenticate.
+
 #### func (*Conn) SetChargeLimit
 
 ```go
