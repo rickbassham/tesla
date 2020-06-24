@@ -85,6 +85,11 @@ func (c *Conn) doRequest(method, url string, reqBody, respBody interface{}) erro
 	}
 
 	resp, err := c.rt.RoundTrip(req)
+
+	if resp != nil {
+		defer resp.Body.Close()
+	}
+
 	if err != nil {
 		return fmt.Errorf("error performing http request: %w", err)
 	}
@@ -94,8 +99,6 @@ func (c *Conn) doRequest(method, url string, reqBody, respBody interface{}) erro
 			statusCode: resp.StatusCode,
 		})
 	}
-
-	defer resp.Body.Close()
 
 	respBytes, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
