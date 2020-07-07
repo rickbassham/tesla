@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/rickbassham/tesla/compare/v1.0.0...v1.0.1) (2020-07-07)
+
+
+### Bug Fixes
+
+* ensure HTTP connections are closed after errored responses ([2d2c32f](https://github.com/rickbassham/tesla/commit/2d2c32f8e3d5026173afc3a52cc03832c372f232))
+
 # 1.0.0 (2020-01-11)
 
 
